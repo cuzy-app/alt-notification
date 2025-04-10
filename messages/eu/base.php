@@ -1,0 +1,5 @@
+<?php
+return [
+  'Alt Notification' => 'Alt jakinarazpena',
+  'Replaces the "{fieldName}" Notification Settings with a new behavior.' => '" {fieldName} " Jakinarazpen ezarpenak portaera berri batekin ordezkatzen ditu.',
+];
