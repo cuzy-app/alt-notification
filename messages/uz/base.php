@@ -1,5 +1,5 @@
 <?php
 return [
-  'Alt Notification' => 'Alt bildirishnoma',
+  'Alternative Notifications' => 'Muqobil bildirishnomalar',
   'Replaces the "{fieldName}" Notification Settings with a new behavior.' => '" {fieldName} " bildirishnoma sozlamalarini yangi xatti-harakat bilan almashtiradi.',
 ];
