@@ -6,15 +6,12 @@
  * @author [Marc FARRE](https://marc.fun)
  */
 
-use humhub\modules\admin\permissions\ManageSettings;
-use humhub\modules\admin\widgets\IncompleteSetupWarning;
 use humhub\modules\altNotification\models\Configuration;
 use humhub\modules\altNotification\Module;
 use humhub\modules\space\widgets\SpacePickerField;
 use humhub\modules\ui\form\widgets\ActiveForm;
 use humhub\modules\ui\view\components\View;
 use humhub\widgets\Button;
-
 
 /**
  * @var $this View
@@ -27,12 +24,6 @@ $module = Yii::$app->getModule('alt-notification');
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <?= Yii::$app->user->can(ManageSettings::class) ? Button::defaultType(Yii::t('AltNotificationModule.config', 'Administration'))
-            ->link(['/alt-notification/admin/index'])
-            ->style('margin-left: 6px;')
-            ->right()
-            ->sm() : '' ?>
-
         <strong><?= $module->getName() ?></strong>
 
         <div class="help-block">
@@ -42,10 +33,10 @@ $module = Yii::$app->getModule('alt-notification');
 
     <div class="panel-body">
 
-        <?= IncompleteSetupWarning::widget() ?>
-
         <div class="alert alert-info">
-            <p><?= Yii::t('AltNotificationModule.config', '') ?></p>
+            <p><?= Yii::t('AltNotificationModule.config', 'This module replaces the "{fieldName}" Notification settings, which means that you can leave it empty.', [
+                'fieldName' => Button::asLink(Yii::t('NotificationModule.base', 'Receive \'New Content\' Notifications for the following spaces'))->link(['/notification/admin/defaults']),
+            ]) ?></p>
         </div>
 
         <?php $form = ActiveForm::begin(['acknowledge' => true]); ?>

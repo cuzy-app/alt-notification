@@ -8,20 +8,18 @@
 
 namespace humhub\modules\altNotification;
 
-use humhub\modules\space\models\Membership;
+use humhub\modules\space\MemberEvent;
 use Yii;
-use yii\base\ModelEvent;
 
 class Events
 {
 
-    public static function onSpaceMembershipBeforeInsert(ModelEvent $event)
+    public static function onSpaceMemberAdded(MemberEvent $event)
     {
-        /** @var Membership $membership */
-        $membership = $event->sender;
-        $space = $membership?->space;
+        $space = $event->space;
+        $user = $event->user;
 
-        if (!$space) {
+        if (!$space || !$user) {
             return;
         }
 
@@ -31,7 +29,7 @@ class Events
 
         // If the Space is in **Module Settings**, auto-add it to their **User Settings**.
         if (in_array($space->guid, $spaceGuids, true)) {
-            Yii::$app->notification->setSpaceSetting($membership->user, $space, true);
+            Yii::$app->notification->setSpaceSetting($user, $space, true);
         }
     }
 }

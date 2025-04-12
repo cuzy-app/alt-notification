@@ -1,9 +1,9 @@
 {
   "id": "alt-notification",
-  "name": "Alt Notification",
+  "name": "Alternative Notifications",
   "description": "Replaces the \"Receive \\'New Content\\' Notifications for the following spaces\" Notification Setting with a new behavior.",
   "keywords": ["notifications", "admin"],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "humhub": {
     "minVersion": "1.16"
   },

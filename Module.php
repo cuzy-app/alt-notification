@@ -57,7 +57,7 @@ class Module extends \humhub\components\Module
      */
     public function getName()
     {
-        return Yii::t('AltNotificationModule.base', 'Alt Notification');
+        return Yii::t('AltNotificationModule.base', 'Alternative Notifications');
     }
 
     /**

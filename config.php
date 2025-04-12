@@ -16,8 +16,8 @@ return [
     'events' => [
         [
             'class' => Membership::class,
-            'event' => Membership::EVENT_BEFORE_INSERT,
-            'callback' => [Events::class, 'onSpaceMembershipBeforeInsert'],
+            'event' => Membership::EVENT_MEMBER_ADDED,
+            'callback' => [Events::class, 'onSpaceMemberAdded'],
         ],
     ],
     // 'urlManagerRules' => [
