@@ -3,9 +3,9 @@
   "name": "Alternative Notifications",
   "description": "Replaces the \"Receive \\'New Content\\' Notifications for the following spaces\" Notification Setting with a new behavior.",
   "keywords": ["notifications", "admin"],
-  "version": "1.0.1",
+  "version": "1.1.0",
   "humhub": {
-    "minVersion": "1.16"
+    "minVersion": "1.18"
   },
   "homepage": "https://cuzy.app",
   "authors": [

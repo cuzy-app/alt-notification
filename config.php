@@ -20,7 +20,4 @@ return [
             'callback' => [Events::class, 'onSpaceMemberAdded'],
         ],
     ],
-    // 'urlManagerRules' => [
-    //     'custom-url' => 'alt-notification/index', // when creating an URL, use Url::to(['/alt-notification/index']) and nether Url::to(['custom-url']) as it doesn't work without pretty URLs
-    // ]
 ];

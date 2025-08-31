@@ -6,12 +6,12 @@
  * @author [Marc FARRE](https://marc.fun)
  */
 
+use humhub\components\View;
 use humhub\modules\altNotification\models\Configuration;
 use humhub\modules\altNotification\Module;
 use humhub\modules\space\widgets\SpacePickerField;
-use humhub\modules\ui\form\widgets\ActiveForm;
-use humhub\modules\ui\view\components\View;
-use humhub\widgets\Button;
+use humhub\widgets\bootstrap\Button;
+use humhub\widgets\form\ActiveForm;
 
 /**
  * @var $this View
@@ -26,14 +26,14 @@ $module = Yii::$app->getModule('alt-notification');
     <div class="panel-heading">
         <strong><?= $module->getName() ?></strong>
 
-        <div class="help-block">
+        <div class="text-body-secondary">
             <?= $module->getDescription() ?>
         </div>
     </div>
 
     <div class="panel-body">
 
-        <div class="alert alert-info">
+        <div class="alert alert-info" role="alert">
             <p><?= Yii::t('AltNotificationModule.config', 'This module replaces the "{fieldName}" Notification settings, which means that you can leave it empty.', [
                 'fieldName' => Button::asLink(Yii::t('NotificationModule.base', 'Receive \'New Content\' Notifications for the following spaces'))->link(['/notification/admin/defaults']),
             ]) ?></p>

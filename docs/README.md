@@ -65,3 +65,7 @@ https://github.com/cuzy-app/alt-notification
 ## Licence
 
 [GNU AGPL](https://github.com/cuzy-app/alt-notification/blob/master/docs/LICENCE.md)
+
+## Financing
+
+The first version was financed by [Jürgen Klühr](https://community.humhub.com/u/j%C3%BCrgenkl2020/)
