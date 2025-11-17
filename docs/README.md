@@ -52,7 +52,7 @@ When the module is enabled:
 
 This module is free, but the result of a lot of work for design and maintenance over time.
 
-If it's useful to you, please consider [making a donation](https://www.cuzy.app/checkout/donate/) or [participating in the code](https://github.com/cuzy-app/clean-theme). Thanks!
+If it's useful to you, please consider [making a donation](https://www.cuzy.app/checkout/donate/) or [participating in the code](https://github.com/alt-notification/clean-theme). Thanks!
 
 ## Repository
 
