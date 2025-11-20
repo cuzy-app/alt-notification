@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Alt Notification
  * @link https://www.cuzy.app
@@ -45,8 +46,8 @@ class Configuration extends Model
     public function attributeHints(): array
     {
         return [
-            'newContentNotifSpaceGuids' =>
-                Yii::t('AltNotificationModule.config', 'When a user joins a Space, if it is in this list, it is added to their "{fieldName}" Notification settings.', [
+            'newContentNotifSpaceGuids'
+                => Yii::t('AltNotificationModule.config', 'When a user joins a Space, if it is in this list, it is added to their "{fieldName}" Notification settings.', [
                     'fieldName' => Yii::t('NotificationModule.base', 'Receive \'New Content\' Notifications for the following spaces'),
                 ]),
         ];

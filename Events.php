@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Alt Notification
  * @link https://www.cuzy.app
@@ -13,7 +14,6 @@ use Yii;
 
 class Events
 {
-
     public static function onSpaceMemberAdded(MemberEvent $event)
     {
         $space = $event->space;

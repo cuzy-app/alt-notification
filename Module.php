@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Alt Notification
  * @link https://www.cuzy.app
