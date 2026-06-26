@@ -8,10 +8,10 @@ Solves issue https://github.com/humhub/humhub/issues/7043
 
 ### Terminology
 
-| Term            | Location |  
-|-----------------|----------|  
-| **User Settings**  | "Your Account" → "Notifications" → *"Receive 'New Content' Notifications for the following spaces"* |  
-| **Admin Settings** | "Admin" → "Settings" → "Notifications" → *"Receive 'New Content' Notifications for the following spaces"*` |  
+| Term                | Location                                                                                                                                   |  
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|  
+| **User Settings**   | "Your Account" → "Notifications" → *"Receive 'New Content' Notifications for the following spaces"*                                        |  
+| **Admin Settings**  | "Admin" → "Settings" → "Notifications" → *"Receive 'New Content' Notifications for the following spaces"*`                                 |  
 | **Module Settings** | `Alternative Notifications` module config → *"Select Spaces for which Users should be notified about new content upon becoming a member."* |  
 
 ### The problem
@@ -20,10 +20,10 @@ With the default HumHub behavior, when adding Public Spaces to **Admin Settings*
 
 ### User Types before using this module
 
-| Type | Description |  
-|------|-------------|  
+| Type  | Description                                          |  
+|-------|------------------------------------------------------|  
 | **A** | Users with default (uncustomized) **User Settings**. |  
-| **B** | Users with explicitly configured **User Settings**. |  
+| **B** | Users with explicitly configured **User Settings**.  |  
 
 Users A will have the same Space list as the one define in **Admin Settings**.
 
@@ -37,7 +37,7 @@ Users A will have the same Space list as the one define in **Admin Settings**.
 #### 2. One-Time Migration
 
 When the module is enabled:
-- Copy all Spaces from **Admin Settings** to **Module Settings**.
+- All Spaces from **Admin Settings** are copied to **Module Settings**.
 - For **Type A** users: Add all Spaces the User is a member of, from **Module Settings**, to their **User Settings**.
 
 #### 3. Ongoing Rules

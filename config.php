@@ -8,6 +8,7 @@
  */
 
 use humhub\modules\altNotification\Events;
+use humhub\modules\notification\widgets\NotificationSettingsForm;
 use humhub\modules\space\models\Membership;
 
 return [
@@ -19,6 +20,11 @@ return [
             'class' => Membership::class,
             'event' => Membership::EVENT_MEMBER_ADDED,
             'callback' => [Events::class, 'onSpaceMemberAdded'],
+        ],
+        [
+            'class' => NotificationSettingsForm::class,
+            'event' => NotificationSettingsForm::EVENT_BEFORE_RUN,
+            'callback' => [Events::class, 'onNotificationSettingsFormBeforeRun'],
         ],
     ],
 ];

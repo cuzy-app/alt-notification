@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.2.0 (June 26, 2026)
+--------------------
+- Enh: Added "Notify Users for all Spaces" settings
+- Enh: Hide the Spaces picker default notification on new content created in the notification settings form, as it is replaced by the module configuration.
+
 1.1.0 (August 31, 2025)
 --------------------
 - Enh: Migration to Bootstrap 5 for HumHub 1.18

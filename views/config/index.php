@@ -7,6 +7,7 @@
  */
 
 use humhub\components\View;
+use humhub\helpers\Html;
 use humhub\modules\altNotification\models\Configuration;
 use humhub\modules\altNotification\Module;
 use humhub\modules\space\widgets\SpacePickerField;
@@ -18,8 +19,7 @@ use humhub\widgets\form\ActiveForm;
  * @var $model Configuration
  */
 
-/** @var Module $module */
-$module = Yii::$app->getModule('alt-notification');
+$module = Module::getInstance();
 ?>
 
 <div class="panel panel-default">
@@ -34,12 +34,13 @@ $module = Yii::$app->getModule('alt-notification');
     <div class="panel-body">
 
         <div class="alert alert-info" role="alert">
-            <p><?= Yii::t('AltNotificationModule.config', 'This module replaces the "{fieldName}" Notification settings, which means that you can leave it empty.', [
-                'fieldName' => Button::asLink(Yii::t('NotificationModule.base', 'Receive \'New Content\' Notifications for the following spaces'))->link(['/notification/admin/defaults']),
-            ]) ?></p>
+            <p><?= Yii::t('AltNotificationModule.config', 'This module replaces the "{fieldName}" Notification settings, which is hidden by this module.', [
+                    'fieldName' => Button::asLink(Yii::t('NotificationModule.base', 'Receive \'New Content\' Notifications for the following spaces'))->link(['/notification/admin/defaults']),
+                ]) ?></p>
         </div>
 
         <?php $form = ActiveForm::begin(['acknowledge' => true]); ?>
+        <?= $form->field($model, 'notifyForAllSpaces')->checkbox() ?>
         <?= $form->field($model, 'newContentNotifSpaceGuids')->widget(SpacePickerField::class, [
             'maxSelection' => 50,
         ]) ?>
@@ -49,3 +50,22 @@ $module = Yii::$app->getModule('alt-notification');
 
     </div>
 </div>
+
+<script <?= Html::nonce() ?>>
+    $(function () {
+        const $notifyForAllSpacesCheckbox = $('#<?= Html::getInputId($model, 'notifyForAllSpaces') ?>');
+        const $newContentNotifSpaceGuidsPicker = $('#<?= Html::getInputId($model, 'newContentNotifSpaceGuids') ?>');
+        const toggleNewContentNotifSpaceGuidsPicker = function () {
+            if ($notifyForAllSpacesCheckbox.prop('checked')) {
+                $newContentNotifSpaceGuidsPicker.parent().hide();
+            } else {
+                $newContentNotifSpaceGuidsPicker.parent().show();
+            }
+        };
+        toggleNewContentNotifSpaceGuidsPicker();
+        $notifyForAllSpacesCheckbox.on('change', function () {
+            toggleNewContentNotifSpaceGuidsPicker();
+        });
+    })
+
+</script>

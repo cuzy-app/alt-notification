@@ -10,11 +10,9 @@
 namespace humhub\modules\altNotification;
 
 use humhub\modules\altNotification\models\Configuration;
-use humhub\modules\notification\components\NotificationManager;
-use humhub\modules\space\models\Membership;
-use humhub\modules\user\models\User;
 use Yii;
 use yii\helpers\Url;
+use yii\web\NotFoundHttpException;
 
 /**
  *
@@ -82,19 +80,6 @@ class Module extends \humhub\components\Module
         $this->configuration->newContentNotifSpaceGuids = $spaceGuis;
         $this->configuration->save();
 
-        // Add all Spaces the User is a member of, from **Module Settings**, to their **User Settings**.
-        foreach (User::find()->active()->all() as $user) {
-            if ($notificationSettings->user($user)?->get(NotificationManager::IS_TOUCHED_SETTINGS)) {
-                continue;
-            }
-            $userSpaceMembershipGuids = Membership::find()
-                ->joinWith('space')
-                ->where(['user_id' => $user->id, 'space_membership.status' => Membership::STATUS_MEMBER])
-                ->select('space.guid')
-                ->column();
-            Yii::$app->notification->setSpaces(array_intersect($spaceGuis, $userSpaceMembershipGuids), $user);
-        }
-
         return true;
     }
 
@@ -110,5 +95,20 @@ class Module extends \humhub\components\Module
         /** @var \humhub\modules\notification\Module $notificationModule */
         $notificationModule = Yii::$app->getModule('notification');
         $notificationModule->settings->setSerialized('sendNotificationSpaces', $spaceGuis);
+
+        return true;
+    }
+
+    /**
+     * @throws NotFoundHttpException
+     */
+    public static function getInstance(): static
+    {
+        /** @var ?static $module */
+        $module = Yii::$app->getModule('alt-notification');
+        if (!$module?->isEnabled) {
+            throw new NotFoundHttpException('Alternate Notification module not enabled');
+        }
+        return $module;
     }
 }
