@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.2.1 (June 26, 2026)
+--------------------
+- Fix: Config crashes when no Spaces are selected in the picker field
+
 1.2.0 (June 26, 2026)
 --------------------
 - Enh: Added "Notify Users for all Spaces" settings

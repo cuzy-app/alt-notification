@@ -21,7 +21,7 @@ class Configuration extends Model
 {
     public SettingsManager $settingsManager;
 
-    public array $newContentNotifSpaceGuids = [];
+    public array|string $newContentNotifSpaceGuids = [];
     public bool $notifyForAllSpaces = false;
 
 
@@ -73,7 +73,7 @@ class Configuration extends Model
             return false;
         }
 
-        $this->settingsManager->setSerialized('newContentNotifSpaceGuids', $this->newContentNotifSpaceGuids);
+        $this->settingsManager->setSerialized('newContentNotifSpaceGuids', (array)$this->newContentNotifSpaceGuids);
         $this->settingsManager->set('notifyForAllSpaces', $this->notifyForAllSpaces);
 
         $this->updateAllUsersNotificationSettings();
@@ -81,17 +81,17 @@ class Configuration extends Model
         return true;
     }
 
-    public function getNewContentNotifSpaceGuids()
+    public function getNewContentNotifSpaceGuids(): array
     {
         return $this->notifyForAllSpaces
             ? Space::find()
                 ->select('guid')
                 ->where(['status' => Space::STATUS_ENABLED])
                 ->column()
-            : $this->newContentNotifSpaceGuids;
+            : (array)$this->newContentNotifSpaceGuids;
     }
 
-    private function updateAllUsersNotificationSettings()
+    private function updateAllUsersNotificationSettings(): void
     {
         // Add all Spaces the User is a member of, from **Module Settings**, to their **User Settings**.
         /** @var User $user */
