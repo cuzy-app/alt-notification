@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.3.0 (Unreleased)
+------------------
+- Fix: Compatibility with HumHub 1.19
+
 1.2.1 (June 26, 2026)
 --------------------
 - Fix: Config crashes when no Spaces are selected in the picker field
