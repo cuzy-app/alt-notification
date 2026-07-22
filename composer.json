@@ -1,6 +1,11 @@
 {
     "name": "cuzy-app/module-model",
     "type": "humhub-module",
+    "autoload": {
+        "psr-4": {
+            "humhub\\modules\\altNotification\\": ""
+        }
+    },
     "config": {
         "platform": {
             "php": "8.2"
