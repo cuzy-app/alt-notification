@@ -69,3 +69,7 @@ https://github.com/cuzy-app/alt-notification
 ## Financing
 
 The first version was financed by [Jürgen Klühr](https://community.humhub.com/u/j%C3%BCrgenkl2020/)
+
+## Hosting
+
+This module is installed and updated for you on [CUZY Hosting](https://www.cuzy.app/hosting), managed HumHub hosting with every CUZY module included.
