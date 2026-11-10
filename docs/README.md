@@ -60,7 +60,7 @@ https://github.com/cuzy-app/alt-notification
 
 ## Publisher
 
-[CUZY.APP](https://www.cuzy.app/)
+[CUZY.app](https://www.cuzy.app)
 
 ## Licence
 

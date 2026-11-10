@@ -37,4 +37,4 @@ Update `module.json`
 
 Once the models are created, if some of them extends ActiveRecord, update `const NON_CONTENT_CLASSES` in move-content and saas modules
 
-See `CUZY.APP/TODO when adding a new module.md`
+See `CUZY.app/TODO when adding a new module.md`
