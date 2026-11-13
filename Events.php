@@ -28,7 +28,7 @@ class Events
         $module = Module::getInstance();
 
         // If the Space is in **Module Settings**, auto-add it to their **User Settings**.
-        if (in_array($space->guid, $module->configuration->getNewContentNotifSpaceGuids(), true)) {
+        if ($module->configuration->isSpaceSelectedForNewContentNotif($space)) {
             Yii::$app->notification->setSpaceSetting($user, $space, true);
         }
     }

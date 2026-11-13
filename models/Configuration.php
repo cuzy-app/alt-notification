@@ -19,6 +19,8 @@ use yii\base\Model;
 
 class Configuration extends Model
 {
+    public const USERS_BATCH_SIZE = 500;
+
     public SettingsManager $settingsManager;
 
     public array|string $newContentNotifSpaceGuids = [];
@@ -91,20 +93,51 @@ class Configuration extends Model
             : (array)$this->newContentNotifSpaceGuids;
     }
 
+    /**
+     * Whether the users becoming members of the space should be notified about its new content
+     * (no query when all the spaces are selected: the space only has to be enabled)
+     */
+    public function isSpaceSelectedForNewContentNotif(Space $space): bool
+    {
+        return $this->notifyForAllSpaces
+            ? $space->status === Space::STATUS_ENABLED
+            : in_array($space->guid, (array)$this->newContentNotifSpaceGuids, true);
+    }
+
+    /**
+     * Add all Spaces the User is a member of, from **Module Settings**, to their **User Settings**.
+     * Users are processed by batches: one membership query per batch instead of one per user,
+     * and the selected spaces are resolved once.
+     */
     private function updateAllUsersNotificationSettings(): void
     {
-        // Add all Spaces the User is a member of, from **Module Settings**, to their **User Settings**.
-        /** @var User $user */
-        foreach (User::find()->active()->all() as $user) {
-            if (NotificationManager::isTouchedSettings($user)) {
-                continue;
+        $selectedSpaceGuids = $this->getNewContentNotifSpaceGuids();
+
+        /** @var User[] $users */
+        foreach (User::find()->active()->batch(self::USERS_BATCH_SIZE) as $users) {
+            $userIds = array_map(static fn(User $user) => $user->id, $users);
+
+            // [user id => guids of the spaces the user is a member of]
+            $membershipRows = Membership::find()
+                ->select(['space_membership.user_id', 'space.guid'])
+                ->innerJoin('space', 'space.id = space_membership.space_id')
+                ->where(['space_membership.user_id' => $userIds, 'space_membership.status' => Membership::STATUS_MEMBER])
+                ->asArray()
+                ->all();
+            $spaceGuidsByUserId = [];
+            foreach ($membershipRows as $row) {
+                $spaceGuidsByUserId[(int)$row['user_id']][] = $row['guid'];
             }
-            $userSpaceMembershipGuids = Membership::find()
-                ->joinWith('space')
-                ->where(['user_id' => $user->id, 'space_membership.status' => Membership::STATUS_MEMBER])
-                ->select('space.guid')
-                ->column();
-            Yii::$app->notification->setSpaces(array_intersect($this->getNewContentNotifSpaceGuids(), $userSpaceMembershipGuids), $user);
+
+            foreach ($users as $user) {
+                if (NotificationManager::isTouchedSettings($user)) {
+                    continue;
+                }
+                Yii::$app->notification->setSpaces(
+                    array_values(array_intersect($selectedSpaceGuids, $spaceGuidsByUserId[$user->id] ?? [])),
+                    $user,
+                );
+            }
         }
     }
 }

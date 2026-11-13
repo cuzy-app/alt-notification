@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.3.1 (Unreleased)
+------------------
+- Enh: Saving the configuration updates the notification settings of the users by batches (one membership query per 500 users instead of one, plus a spaces query, per user), so it no longer times out on large platforms
+- Enh: Adding a member to a space no longer loads the list of all the spaces when "Notify Users for all Spaces" is on
+
 1.3.0 (July 16, 2026)
 ------------------
 - Fix: Compatibility with HumHub 1.19
