@@ -78,4 +78,18 @@ class ConfigurationTest extends HumHubDbTestCase
 
         $this->assertSame(1, (int)Membership::findOne(['space_id' => 2, 'user_id' => 3])->send_notifications);
     }
+
+    public function testCreatorOfANewSpaceGetsTheNotificationSettingWhenAllSpacesAreSelected(): void
+    {
+        $configuration = Module::getInstance()->getConfiguration();
+        $configuration->notifyForAllSpaces = true;
+
+        // The creator is added as a member in Space::afterSave(), before the status (column default) is set on the object
+        $space = new Space(['name' => 'New space ' . uniqid('', true)]);
+        $this->assertNull($space->status);
+        $this->assertTrue($configuration->isSpaceSelectedForNewContentNotif($space));
+
+        $space->status = (string)Space::STATUS_ENABLED;
+        $this->assertTrue($configuration->isSpaceSelectedForNewContentNotif($space), 'Status read as a string');
+    }
 }

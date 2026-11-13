@@ -99,8 +99,10 @@ class Configuration extends Model
      */
     public function isSpaceSelectedForNewContentNotif(Space $space): bool
     {
+        // A space being created has no status yet on the object when its creator is added as a member:
+        // it gets the column default (enabled) in the database
         return $this->notifyForAllSpaces
-            ? $space->status === Space::STATUS_ENABLED
+            ? (int)($space->status ?? Space::STATUS_ENABLED) === Space::STATUS_ENABLED
             : in_array($space->guid, (array)$this->newContentNotifSpaceGuids, true);
     }
 
